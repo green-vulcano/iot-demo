@@ -1,0 +1,108 @@
+{
+  "id":"GVDEV002",
+  "nm":"GV Glove",
+  "mac":"FA:5F:67:5F:BD:85",
+  "ip":"10.100.80.31",
+  "prt":"",
+  "family":"Gloves for Automation",
+  "model":"",
+  "desc":"Glove consists of 5 flexion sensors",
+  "loc":
+  {
+    "type": "Feature",
+    "geometry": 
+    {
+      "type": "Point",
+      "coordinates": [41.911841, 12.456354]
+    },
+    "properties": 
+    {
+      "name": "GV Glove",
+      "indoor": "gvlab first floor"
+    }
+  },
+  "mode":["sleep"],
+  "sens":
+  [ {
+      "id":"SED00201",
+      "nm":"Flex Thumb",
+      "tp": "NUMERIC",
+      "family":"Flex Sensor",
+      "model":"Spectra Symbol",
+      "desc":"Sensor flex for the acquisition of the values ​​of the thumb",
+      "capabilities": 
+      {
+	"measure":"Volt",
+	"frequency":"",
+	"max_value":500,
+	"min_value":1000,
+	"set":""
+      }
+    },
+    {
+      "id":"SED00202",
+      "nm":"Flex Index Finger",
+      "tp": "NUMERIC",
+      "family":"Flex Sensor",
+      "model":"Spectra Symbol",
+      "desc":"Sensor flex for the acquisition of the values ​​of the index finger",
+      "capabilities": 
+      {
+	"measure":"Volt",
+	"frequency":"",
+	"max_value":500,
+	"min_value":1000,
+	"set":""
+      }
+    },
+    {
+      "id":"SED00203",
+      "nm":"Flex Middle Finger",
+      "tp": "NUMERIC",
+      "family":"Flex Sensor",
+      "model":"Spectra Symbol",
+      "desc":"Sensor flex for the acquisition of the values ​​of the middle finger",
+      "capabilities": 
+      {
+	"measure":"Volt",
+	"frequency":"",
+	"max_value":500,
+	"min_value":1000,
+	"set":""
+      }
+    },
+    {
+      "id":"SED00204",
+      "nm":"Flex Ring Finger",
+      "tp": "NUMERIC",
+      "family":"Flex Sensor",
+      "model":"Spectra Symbol",
+      "desc":"Sensor flex for the acquisition of the values ​​of the ring finger",
+      "capabilities": 
+      {
+	"measure":"Volt",
+	"frequency":"",
+	"max_value":500,
+	"min_value":1000,
+	"set":""
+      }
+    },
+    {
+      "id":"SED00205",
+      "nm":"Flex Little Finger",
+      "tp": "NUMERIC",
+      "family":"Flex Sensor",
+      "model":"Spectra Symbol",
+      "desc":"Sensor flex for the acquisition of the values ​​of the little finger",
+      "capabilities": 
+      {
+	"measure":"Volt",
+	"frequency":"",
+	"max_value":500,
+	"min_value":1000,
+	"set":""
+      }
+    }
+  ],
+  "acts":[]
+}

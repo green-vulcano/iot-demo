@@ -1,0 +1,140 @@
+{
+  "id":"GVDEV003",
+  "nm":"GV Polisensor",
+  "mac":"",
+  "ip":"",
+  "prt":"",
+  "family":"Console",
+  "model":"",
+  "desc":"Multi sensors console. It is composed of a distance sensor, two buttons, one potentiometer, one linear potentiometer and one 1-way rotary switch with 12 positions",
+  "loc":
+  {
+    "type": "Feature",
+    "geometry": 
+    {
+      "type": "Point",
+      "coordinates": [41.911841, 12.456354]
+    },
+    "properties": 
+    {
+      "name": "GV Polisensor",
+      "indoor": "gvlab first floor"
+    }
+  },
+  "mode":["sleep"],
+  "sens":
+  [ {
+      "id":"SED00301",
+      "nm":"Distance Sensor",
+      "tp": "NUMERIC",
+      "family":"Ultrasonic Ranging Module",
+      "model":"HC-SR04",
+      "desc":"Sensor for the measurement of distances",
+      "capabilities": 
+      {
+	"measure":"Cm",
+	"frequency":"",
+	"max_value":50,
+	"min_value":2,
+	"set":""
+      }
+    },
+    {
+      "id":"SED00302",
+      "nm":"Green Button",
+      "tp": "MONOSTABLE",
+      "family":"Buttons Panel",
+      "model":"",
+      "desc":"",
+      "capabilities": 
+      {
+	"measure":"boolean",
+	"frequency":"",
+	"max_value":"",
+	"min_value":"true",
+	"set":""
+      }
+    },
+    {
+      "id":"SED00303",
+      "nm":"Red Button",
+      "tp": "MONOSTABLE",
+      "family":"Buttons Panel",
+      "model":"",
+      "desc":"",
+      "capabilities": 
+      {
+	"measure":"boolean",
+	"frequency":"",
+	"max_value":"",
+	"min_value":"true",
+	"set":""
+      }
+    },
+    {
+      "id":"SED00304",
+      "nm":"Knob",
+      "tp": "NUMERIC",
+      "family":"Potentiometer",
+      "model":"B10K",
+      "desc":"",
+      "capabilities": 
+      {
+	"measure":"String",
+	"frequency":"",
+	"max_value":"1020",
+	"min_value":"0",
+	"set":""
+      }
+    },
+    {
+      "id":"SED00305",
+      "nm":"Slider",
+      "tp": "JSON_OBJECT",
+      "family":"Linear Potentiometer",
+      "model":"B10K",
+      "desc":"",
+      "capabilities": 
+      {
+	"measure":"String",
+	"frequency":"",
+	"max_value":"1020",
+	"min_value":"0",
+	"set":""
+      }
+    },
+    {
+      "id":"SED00306",
+      "nm":"Rotary Switch",
+      "tp": "NUMERIC",
+      "family":"",
+      "model":"",
+      "desc":"",
+      "capabilities": 
+      {
+	"measure":"",
+	"frequency":"",
+	"max_value":"",
+	"min_value":"",
+	"set":"[0,10,210,280,410,500,610,710,810,910,970,1020]"
+      }
+    },
+    {
+      "id":"SED00307",
+      "nm":"Switch",
+      "tp": "BISTABLE",
+      "family":"",
+      "model":"",
+      "desc":"",
+      "capabilities": 
+      {
+  "measure":"boolean",
+  "frequency":"",
+  "max_value":"true",
+  "min_value":"false",
+  "set":""
+      }
+    }    
+  ],
+  "acts":[]
+} 

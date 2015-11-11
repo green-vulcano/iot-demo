@@ -1,0 +1,44 @@
+{
+  "id":"GVDEV005",
+  "nm":"GV Color Picker",
+  "mac":"",
+  "ip":"",
+  "prt":"",
+  "family":"Web App",
+  "model":"",
+  "desc":"Color Picker consist of a polychromatic disc clickable to retrieve the color touched",
+  "loc":
+  {
+    "type": "Feature",
+    "geometry": 
+    {
+      "type": "Point",
+      "coordinates": [41.911841, 12.456354]
+    },
+    "properties": 
+    {
+      "name": "GV Color Picker",
+      "indoor": "gvlab first floor"
+    }
+  },
+  "mode":[],
+  "sens":
+  [ {
+      "id":"SED00501",
+      "nm":"Polychromatic Disc",
+      "tp": "NUMERIC",
+      "family":"Web App",
+      "model":"",
+      "desc":"A graphic polychromatic disc",
+      "capabilities": 
+      {
+	"measure":"String",
+	"frequency":"",
+	"max_value":"FFFFFF",
+	"min_value":"000000",
+	"set":""
+      }
+    }
+  ],
+  "acts":[]
+}

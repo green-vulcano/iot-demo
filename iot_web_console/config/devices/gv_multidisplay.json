@@ -1,0 +1,147 @@
+{
+  "id":"GVDEV004",
+  "nm":"GV Multidisplay",
+  "mac":"B8:27:EB:F9:D9:6D",
+  "ip":"10.100.80.39",
+  "prt":"",
+  "family":"",
+  "model":"",
+  "desc":"Multidisplay consist of different monitors which allow the display of data",
+  "loc":
+  {
+    "type": "Feature",
+    "geometry": 
+    {
+      "type": "Point",
+      "coordinates": [41.911841, 12.456354]
+    },
+    "properties": 
+    {
+      "name": "GV Multidisplay",
+      "indoor": "gvlab first floor"
+    }
+  },
+  "mode":["demo"],
+  "sens":[],
+  "acts":
+  [ {
+      "id":"ACD00401",
+      "nm":"Green Display",
+      "tp": "NUMERIC",
+      "family":"Display",
+      "model":"EC-194529",
+      "desc":"A 16x2 line green display",
+      "capabilities": 
+      {
+	"measure":"String",
+	"max_value":"",
+	"min_value":"",
+	"set":""
+      }
+    },
+    {
+      "id":"ACD00402",
+      "nm":"Blue Display",
+      "tp": "NUMERIC",
+      "family":"Display",
+      "model":"EC-16x2 line blue display",
+      "capabilities": 
+      {
+	"measure":"String",
+	"max_value":"",
+	"min_value":"",
+	"set":""
+      }
+    },
+    {
+      "id":"ACD00403",
+      "nm":"Seven Segment 1",
+      "tp": "NUMERIC",
+      "family":"Display",
+      "model":"HDSP-C8S3",
+      "desc":"A seven segment blue led display",
+      "capabilities": 
+      {
+	"measure":"",
+	"max_value":"",
+	"min_value":"",
+	"set":""
+      }
+    },
+    {
+      "id":"ACD00404",
+      "nm":"Seven Segment 2",
+      "tp": "NUMERIC",
+      "family":"Display",
+      "model":"HDSP-C8S3",
+      "desc":"A seven segment blue led display",
+      "capabilities": 
+      {
+	"measure":"",
+	"max_value":"",
+	"min_value":"",
+	"set":""
+      }
+    },
+    {
+      "id":"ACD00405",
+      "nm":"Seven Segment 3",
+      "tp": "NUMERIC",
+      "family":"Display",
+      "model":"HDSP-C8S3",
+      "desc":"A seven segment green led display",
+      "capabilities": 
+      {
+	"measure":"",
+	"max_value":"",
+	"min_value":"",
+	"set":""
+      }
+    },
+    {
+      "id":"ACD00406",
+      "nm":"Seven Segment 4",
+      "tp": "NUMERIC",
+      "family":"Display",
+      "model":"HDSP-C8S3",
+      "desc":"A seven segment green led display",
+      "capabilities": 
+      {
+	"measure":"Char",
+	"max_value":"",
+	"min_value":"",
+	"set":""
+      }
+    },
+    {
+      "id":"ACD00407",
+      "nm":"Seven Segment Collection",
+      "tp": "NUMERIC",
+      "family":"Display",
+      "model":"HDSP-C8S3",
+      "desc":"The set of four displays",
+      "capabilities": 
+      {
+	"measure":"String",
+	"max_value":"",
+	"min_value":"",
+	"set":""
+      }
+    },
+    {
+      "id":"ACD00408",
+      "nm":"Led RGB",
+      "tp": "NUMERIC",
+      "family":"Led",
+      "model":"",
+      "desc":"Four led RGB used for games of colors",
+      "capabilities": 
+      {
+	"measure":"String",
+	"max_value":"FFFFFF",
+	"min_value":"000000",
+	"set":""
+      }
+    }
+  ]
+} 

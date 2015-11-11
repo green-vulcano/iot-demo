@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="materialTheme/js/ripples.min.js"></script>
+		<script src="materialTheme/js/material.min.js"></script>
+		<script src="js/mqttws31.js"></script>
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="materialTheme/css/roboto.min.css" rel="stylesheet">
+		<link href="materialTheme/css/material.min.css" rel="stylesheet">
+		<link href="materialTheme/css/material-fullpalette.css" rel="stylesheet">
+		<link href="materialTheme/css/ripples.min.css" rel="stylesheet">
+		<link href="css/custom.css" rel="stylesheet">
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>GV Color Picker</title>
+	</head>
+  <body>
+
+	<!-- ============================== header panel ================================ -->
+	<div class="row">
+		<div class="panel panel-default panel_header">
+			<div class="panel-body padding_panel_header">
+				<div class="col-xs-6 col-md-6">
+					<h1>GV Color Picker</h1>
+				</div>
+			</div>
+			<img src="images/colorPicker.png" class="img-circle image_panel shadow-z-2">
+		</div>
+	</div>
+
+	<!-- ============================== container color wheel ================================ -->
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<div class="colorpicker" >
+				<canvas id="picker" width="300" height="300"></canvas>
+			</div>
+		</div>
+	</div>
+
+
+<!-- ############################################## javascript ################################################ -->
+
+
+
+<!--=================================== initialize material design theme =========================-->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$.material.init();
+		});
+	</script>
+
+<!--=================================== mqtt connection ===========================================-->
+	<script type="text/javascript">
+		var server_ip = "10.100.80.39";
+		var server_port = 9001;
+		client_id = "colorpicker" + parseInt(Math.random() * 100, 10);
+		var topic = "/devices/GVDEV005/sensors/SED00501/output";
+		var status_topic = "/devices/GVDEV005/status";
+
+		var client = new Paho.MQTT.Client(server_ip, server_port, client_id);
+
+
+		window.addEventListener("beforeunload", function (e) {
+			var message = new Paho.MQTT.Message("{\"st\":" + false + "}");
+			message.destinationName = status_topic;
+			message.qos = 1;
+			message.retain = true;
+			client.send(message);
+		});
+
+		client.onConnectionLost = function (responseObject) {
+			console.log("connection lost: " + responseObject.errorMessage);
+		};
+
+		var options = {
+			timeout: 3,
+			onSuccess: function () {
+				console.log("mqtt connected");
+				var message = new Paho.MQTT.Message("{\"st\":" + true + "}");
+				message.destinationName = status_topic;
+				message.qos = 1;
+				message.retained = true;
+				client.send(message);
+			},
+			onFailure: function (message) {
+				console.log("Connection failed: " + message.errorMessage);
+			}
+		};
+
+		function publish (value, topic) {
+			var message = new Paho.MQTT.Message("{\"value\" : \"" + value + "\"}");
+			message.destinationName = topic;
+			client.send(message);
+		}
+
+		client.connect(options);
+	</script>
+
+<!--=================================== color picker engine ===========================================-->
+	<script type="text/javascript">
+		$(function() {
+			// create canvas and context objects
+			var canvas = document.getElementById('picker');
+			var ctx = canvas.getContext('2d');
+
+			// drawing active image
+			var image = new Image();
+			image.onload = function () {
+				// draw the image on the canvas
+				ctx.drawImage(image, 0, 0, image.width, image.height); 
+			}
+
+			image.src = 'images/colorwheel1.png';
+			var color = "000000";
+
+			$('#picker').mousemove(function(e) { // mouse move handler
+				// get coordinates of current position
+				var canvasOffset = $(canvas).offset();
+				var canvasX = Math.floor(e.pageX - canvasOffset.left);
+				var canvasY = Math.floor(e.pageY - canvasOffset.top);
+
+				// get current pixel
+				var imageData = ctx.getImageData(canvasX, canvasY, 1, 1);
+				var pixel = imageData.data;
+
+				// update preview color
+				var pixelColor = "rgb("+pixel[0]+", "+pixel[1]+", "+pixel[2]+")";
+				$('.preview').css('backgroundColor', pixelColor);
+
+				var dColor = pixel[2] + 256 * pixel[1] + 65536 * pixel[0];
+				color = '#' + ('00000' + dColor.toString(16)).substr(-6);
+				color = color.toUpperCase().substring(1, 7);
+			});
+
+			// click event handler
+			$('#picker').click(function(e) {
+				publish(color, topic)
+			});
+		});
+	</script>
+  </body>
+</html>

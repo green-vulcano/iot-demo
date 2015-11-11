@@ -1,0 +1,26 @@
+body {
+    background-color: #004249!important;
+}
+
+.style_title{
+    margin-top: 50px;
+    padding-top: 50px;
+}
+
+
+.style_panel{
+    height: 340px;
+}
+
+.button_enter{
+    float: right;
+}
+
+.style_input{
+    margin-top: 20px;
+}
+
+
+.style_button{
+    margin-top: 30px;
+}

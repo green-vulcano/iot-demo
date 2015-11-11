@@ -1,0 +1,103 @@
+{
+  "id":"GVDEV001",
+  "nm":"GV Robotic Hand",
+  "mac":"DE:1D:BC:EE:FE:ED",
+  "ip":"10.100.80.28",
+  "prt":"",
+  "family":"Robotic Arts",
+  "model":"",
+  "desc":"Robotic hand consists of 5 servo that allow the movement of the fingers",
+  "loc":
+  {
+    "type": "Feature",
+    "geometry": 
+    {
+      "type": "Point",
+      "coordinates": [41.911841, 12.456354]
+    },
+    "properties": 
+    {
+      "name": "GV Robotic Hand",
+      "indoor": "gvlab first floor"
+    }
+  },
+  "mode":["sleep","demo"],
+  "sens":[],
+  "acts":
+  [ {
+      "id":"ACD00101",
+      "nm":"Servo Thumb",
+      "tp": "NUMERIC",
+      "family":"Servo",
+      "model":"SG90",
+      "desc":"Servo dedicated to the movement of the thumb",
+      "capabilities": 
+      {
+	"measure":"degree",
+	"max_value":180,
+	"min_value":0,
+	"set":""
+      }
+    },
+    {
+      "id":"ACD00102",
+      "nm":"Servo Index Finger",
+      "tp": "NUMERIC",
+      "family":"Servo",
+      "model":"SG90",
+      "desc":"Servo dedicated to the movement of the index finger",
+      "capabilities": 
+      {
+	"measure":"degree",
+	"max_value":180,
+	"min_value":0,
+	"set":""
+      }
+    },
+    {
+      "id":"ACD00103",
+      "nm":"Servo Middle Finger",
+      "tp": "NUMERIC",
+      "family":"Servo",
+      "model":"SG90",
+      "desc":"Servo dedicated to the movement of the middle finger",
+      "capabilities": 
+      {
+	"measure":"degree",
+	"max_value":180,
+	"min_value":0,
+	"set":""
+      }
+    },
+    {
+      "id":"ACD00104",
+      "nm":"Servo Ring Finger",
+      "tp": "NUMERIC",
+      "family":"Servo",
+      "model":"SG90",
+      "desc":"Servo dedicated to the movement of the ring finger",
+      "capabilities": 
+      {
+	"measure":"degree",
+	"max_value":180,
+	"min_value":0,
+	"set":""
+      }
+    },
+    {
+      "id":"ACD00105",
+      "nm":"Servo Little Finger",
+      "tp": "NUMERIC",
+      "family":"Servo",
+      "model":"SG90",
+      "desc":"Servo dedicated to the movement of the little finger",
+      "capabilities": 
+      {
+	"measure":"degree",
+	"max_value":180,
+	"min_value":0,
+	"set":""
+      }
+    }
+  ]
+}

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="materialTheme/js/ripples.min.js"></script>
+	<script src="materialTheme/js/material.min.js"></script>
+	<script src="js/mqttws31.js"></script>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="materialTheme/css/roboto.min.css" rel="stylesheet">
+	<link href="materialTheme/css/material.min.css" rel="stylesheet">
+	<link href="materialTheme/css/material-fullpalette.css" rel="stylesheet">
+	<link href="materialTheme/css/ripples.min.css" rel="stylesheet">
+	<link href="css/custom.css" rel="stylesheet">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>GV Chars</title>
+  </head>
+  <body>
+	<!-- ============================== header panel ================================ -->
+	<div class="row">
+		<div class="panel panel-default panel_header">
+			<div class="panel-body padding_panel_header">
+				<div class="col-xs-6 col-md-6">
+					<h1>GV Chars</h1>
+					<!--  -->
+				</div>
+			</div>
+			<img src="images/D7seg.jpg" class="img-circle image_panel shadow-z-2">
+		</div>
+	</div>
+
+
+	<!-- ============================== display char panel ================================ -->
+	<div class="row padding_row row_central">
+		<div class="col-xs-3 col-md-3">
+			<div class="panel panel-default panel_led_blue" >
+				<div class="panel-body text-center font_display" id="panel_led_blue1">&nbsp;</div>
+			</div>
+		</div>
+		<div class="col-xs-3 col-md-3">
+			<div class="panel panel-default panel_led_blue" >
+				<div class="panel-body text-center font_display" id="panel_led_blue2">&nbsp;</div>
+			</div>
+		</div>
+		<div class="col-xs-3 col-md-3">
+			<div class="panel panel-default panel_led_green" >
+				<div class="panel-body text-center font_display" id="panel_led_green1">&nbsp;</div>
+			</div>
+		</div>
+		<div class="col-xs-3 col-md-3">
+			<div class="panel panel-default panel_led_green" >
+				<div class="panel-body text-center font_display" id="panel_led_green2">&nbsp;</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- ============================== choose number list ================================ -->
+	<div class="row padding_row">
+		<div class="col-xs-3 col-md-3">
+			<div class="list-group style_list text-center">
+				<div class="list-group-item display_char" id="display_blue_1"></div>
+			</div>
+		</div>
+		<div class="col-xs-3 col-md-3">
+			<div class="list-group style_list text-center">
+				<div class="list-group-item display_char" id="display_blue_2"></div>
+			</div>
+		</div>
+		<div class="col-xs-3 col-md-3">
+			<div class="list-group style_list text-center">
+				<div class="list-group-item display_char" id="display_green_1"></div>
+			</div>
+		</div>
+		<div class="col-xs-3 col-md-3">
+			<div class="list-group style_list text-center">
+				<div class="list-group-item display_char" id="display_green_2"></div>
+			</div>
+		</div>
+	</div>
+
+	<!--=================================== text ===========================================-->
+	<div class="well well-sm margin_well well-material-teal-50">
+		choose a number or letter in a list
+	</div>
+
+
+
+
+
+<!-- ############################################## javascript ################################################ -->
+
+
+
+
+
+<!--=================================== cicle for generate item list ===========================================-->
+<script type="text/javascript">
+	$(document).ready(function() {
+		var chars = [".", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "Y", "Z", "&nbsp;"];
+		chars.forEach(function(c) {
+			$(".display_char").append('<a href="#" class="list-group-item-heading"><h4>' + c + '</h4></a>');
+		});
+	});
+</script>
+
+
+<!--=================================== initialize material design theme ===========================================-->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$.material.init();
+		});
+	</script>
+
+<!--==================================== mqtt connection ===========================================-->
+	<script type="text/javascript">
+		var server_ip = "10.100.80.39";
+		var server_port = 9001;
+		client_id = "7segment" + parseInt(Math.random() * 100, 10);
+		var topic1 = "/devices/GVDEV006/sensors/SED00601/output"
+		var topic2 = "/devices/GVDEV006/sensors/SED00602/output"
+		var topic3 = "/devices/GVDEV006/sensors/SED00603/output"
+		var topic4 = "/devices/GVDEV006/sensors/SED00604/output"
+		var status_topic = "/devices/GVDEV006/status";
+
+		var client = new Paho.MQTT.Client(server_ip, server_port, client_id);
+
+		window.addEventListener("beforeunload", function (e) {
+			var message = new Paho.MQTT.Message("{\"st\":" + false + "}");
+			message.destinationName = status_topic;
+			message.qos = 1;
+			message.retain = true;
+			client.send(message);
+		});
+
+		client.onConnectionLost = function (responseObject) {
+			console.log("connection lost: " + responseObject.errorMessage);
+		};
+
+		var options = {
+			timeout: 3,
+			onSuccess: function () {
+				console.log("mqtt connected");
+				var message = new Paho.MQTT.Message("{\"st\":" + true + "}");
+				message.destinationName = status_topic;
+				message.qos = 1;
+				message.retained = true;
+				client.send(message);
+			},
+			onFailure: function (message) {
+				console.log("Connection failed: " + message.errorMessage);
+			}
+		};
+
+		function publish (value, topic) {
+			var message = new Paho.MQTT.Message("{\"value\" : \"" + value + "\"}");
+			message.destinationName = topic;
+			client.send(message);
+		}
+
+		client.connect(options);
+
+	</script>
+
+<!--========================================= publish on click item list ===========================================-->
+	<script type="text/javascript">
+		$("#display_blue_1").on("click", "a", function (event) {
+			$("#panel_led_blue1").text($(this).text());
+			publish($(this).text(), topic1);
+		});
+
+		$("#display_blue_2").on("click", "a", function (event) {
+			$("#panel_led_blue2").text($(this).text());
+			publish($(this).text(), topic2);
+		});
+
+		$("#display_green_1").on("click", "a", function (event) {
+			$("#panel_led_green1").text($(this).text());
+			publish($(this).text(), topic3);
+		});
+
+		$("#display_green_2").on("click", "a", function (event) {
+			$("#panel_led_green2").text($(this).text());
+			publish($(this).text(), topic4);
+		});
+	</script>
+
+  </body>
+</html>

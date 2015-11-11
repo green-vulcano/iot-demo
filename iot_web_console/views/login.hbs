@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="js/jquery-1.11.3.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+
+        <script src="themes/material/js/ripples.min.js"></script>
+        <script src="themes/material/js/material.min.js"></script>
+
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="themes/material/css/roboto.min.css" rel="stylesheet">
+        <link href="themes/material/css/material.min.css" rel="stylesheet">
+        <link href="themes/material/css/material-fullpalette.css" rel="stylesheet">
+        <link href="themes/material/css/ripples.min.css" rel="stylesheet">
+
+        <link href="css/login.css" rel="stylesheet">
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Login GV Virtual Console</title>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <!-- row header -->
+                <div class="col-xs-4 col-md-4"></div>
+                <div class="col-xs-4 col-md-4">
+                    <div class="panel panel-primary style_panel shadow-z-4">
+                        <div class="panel-heading style_title">
+                            <h3 class="panel-title">Login IoT Console</h3>
+                        </div>
+                        <div class="panel-body panel-material-teal-200">
+                            <form id="loginForm" action="/data/login" method="post">
+                                <input type="text" class="form-control floating-label style_input" name="username" placeholder="username" />
+                                <input type="password" class="form-control floating-label style_input" name="password" placeholder="password" />
+                                <br>
+                                <a href="#" id="btn_submit" class="btn btn-info shadow-z-2 button_enter style_button">enter</a>
+                                <a href="#" id="btn_cancel" class="btn btn-default button_enter style_button">cancel</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4 col-md-4"></div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $.material.init();
+
+                $("#btn_submit").click(function(e) {
+                    $("#loginForm").submit();
+        
+                    e.preventDefault();
+                });
+            });         
+        </script>
+    </body>
+</html>

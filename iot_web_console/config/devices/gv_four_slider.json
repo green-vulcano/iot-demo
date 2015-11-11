@@ -1,0 +1,92 @@
+{
+  "id":"GVDEV006",
+  "nm":"GV Four Slider",
+  "mac":"",
+  "ip":"",
+  "prt":"",
+  "family":"Web App",
+  "model":"",
+  "desc":"Four slider is formed of four segments which can be scrolled",
+  "loc":
+  {
+    "type": "Feature",
+    "geometry": 
+    {
+      "type": "Point",
+      "coordinates": [41.911841, 12.456354]
+    },
+    "properties": 
+    {
+      "name": "GV Four Slider",
+      "indoor": "gvlab first floor"
+    }
+  },
+  "mode":[],
+  "sens":
+  [ {
+      "id":"SED00601",
+      "nm":"Segment 1",
+      "tp": "NUMERIC",
+      "family":"Web App",
+      "model":"",
+      "desc":"A graphic slider cylindrical",
+      "capabilities": 
+      {
+	"measure":"",
+	"frequency":"",
+	"max_value":"",
+	"min_value":"",
+	"set":""
+      }
+    },
+    {
+      "id":"SED00602",
+      "nm":"Segment 2",
+      "tp": "NUMERIC",
+      "family":"Web App",
+      "model":"",
+      "desc":"A graphic slider cylindrical",
+      "capabilities": 
+      {
+	"measure":"",
+	"frequency":"",
+	"max_value":"",
+	"min_value":"",
+	"set":""
+      }
+    },
+    {
+      "id":"SED00603",
+      "nm":"Segment 3",
+      "tp": "NUMERIC",
+      "family":"Web App",
+      "model":"",
+      "desc":"A graphic slider cylindrical",
+      "capabilities": 
+      {
+	"measure":"",
+	"frequency":"",
+	"max_value":"",
+	"min_value":"",
+	"set":""
+      }
+    },
+    {
+      "id":"SED00604",
+      "nm":"Segment 4",
+      "tp": "NUMERIC",
+      "family":"Web App",
+      "model":"",
+      "desc":"A graphic slider cylindrical",
+      "capabilities": 
+      {
+	"measure":"",
+	"frequency":"",
+	"max_value":"",
+	"min_value":"",
+	"set":""
+      }
+    }
+  ],
+  "acts":[]
+}

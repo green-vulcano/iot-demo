@@ -1,0 +1,73 @@
+{
+  "id":"GVDEV009",
+  "nm":"Philips HUE",
+  "mac":"00:17:88:13:CD:87",
+  "ip":"10.100.80.26",
+  "prt":"",
+  "family":"Intelligent Lights",
+  "model":"Zigbee IP Bridge",
+  "desc":"The device 'Philips HUE' is equipped with three lamps that light up in different colors depending on the commands sent",
+  "loc":
+  {
+    "type": "Feature",
+    "geometry": 
+    {
+      "type": "Point",
+      "coordinates": [41.911841, 12.456354]
+    },
+    "properties": 
+    {
+      "name": "Phillips HUE",
+      "indoor": "gvlab first floor"
+    }
+  },
+  "mode":["sleep","demo"],
+  "sens":[],
+  "acts":
+  [ {
+      "id":"ACD00901",
+      "nm":"Lamp one",
+      "tp": "NUMERIC",
+      "family":"Light",
+      "model":"",
+      "desc":"Philips multicolored lamp",
+      "capabilities": 
+      {
+	"measure":"",
+	"max_value":"",
+	"min_value":"",
+	"set":""
+      }
+    },
+    {
+      "id":"ACD00902",
+      "nm":"Lamp two",
+      "tp": "NUMERIC",
+      "family":"Light",
+      "model":"",
+      "desc":"Philips multicolored lamp",
+      "capabilities": 
+      {
+	"measure":"",
+	"max_value":"",
+	"min_value":"",
+	"set":""
+      }
+    },
+    {
+      "id":"ACD00903",
+      "nm":"Lamp three",
+      "tp": "NUMERIC",
+      "family":"Light",
+      "model":"",
+      "desc":"Philips multicolored lamp",
+      "capabilities": 
+      {
+	"measure":"",
+	"max_value":"",
+	"min_value":"",
+	"set":""
+      }
+    }
+  ]
+} 
