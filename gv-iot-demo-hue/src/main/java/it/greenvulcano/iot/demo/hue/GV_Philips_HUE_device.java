@@ -59,7 +59,6 @@ public class GV_Philips_HUE_device {
 	 * Device callback 
 	 */
 	public class CallbackDevice implements Callback {
-		@Override
 		public Callback call(Object value) {
 			String pValue = "";
 			
@@ -118,7 +117,6 @@ public class GV_Philips_HUE_device {
 			this.id = id;
 		}
 		
-		@Override
 		public Callback call(Object value) {
 			String receivedMessage = new String((byte[])value);
 			int tidac = 0;
@@ -126,11 +124,11 @@ public class GV_Philips_HUE_device {
 			if (current_mode == 1 || current_mode == 3) {
 				System.out.println("ACTUATOR " + this.id + " CALLBACK CALLED: " + receivedMessage);
 				
-				if (this.id == "ACD00901") {
+				if (this.id.equals("ACD00901")) {
 				    tidac = 1;
-				} else if (this.id == "ACD00902") {
+				} else if (this.id.equals("ACD00902")) {
 				    tidac = 2;
-				} else if (this.id == "ACD00903") {
+				} else if (this.id.equals("ACD00903")) {
 				    tidac = 3;
 				}
 				
