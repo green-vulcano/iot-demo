@@ -21,6 +21,8 @@ package it.greenvulcano.iot.demo.hue;
 
 import java.io.IOException;
 
+import it.greenvulcano.iot.protocols.Protocol;
+import it.greenvulcano.iot.protocols.ProtocolFactory;
 import org.json.JSONObject;
 
 import java.io.OutputStreamWriter;
@@ -60,10 +62,9 @@ public class GV_Philips_HUE_device {
 	 */
 	public class CallbackDevice implements Callback {
 		public Callback call(Object value) {
-			String pValue = "";
-			
+
 			try {
-				pValue = new String((byte[])value);
+				String pValue = new String((byte[])value);
 				System.out.println("VALORE: " + pValue);
 								
 				if(pValue.equals("{\"value\":\"OFF\"}")) {
@@ -233,10 +234,11 @@ public class GV_Philips_HUE_device {
 			MqttTransport mqttTransport = new MqttTransport(connectionParam);
 				
 			/* ...and a protocol */
-			Protocol_IOT_v1 protocol = new Protocol_IOT_v1(device, mqttTransport);
+			Protocol protocol = ProtocolFactory.getInstance().createDefaultProtocol(device, mqttTransport);
 		
 			/* Use the GVComm to connect transport with protocol... */
 			GVComm gvComm = new GVComm(mqttTransport, protocol);
+			mqttTransport.connect();
 			
 			/* ... and send device, sensors and actuators info to the server */
 			gvComm.addDevice(cbDevice);
