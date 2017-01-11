@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">	
+	{{> head}}
+	<body>
+		<div id="rest_time_wrap">
+			<h1>
+				<i class="fa fa-spinner fa-spin"></i>
+				<br>
+				<br>
+				Car stopped at data collection center: 
+				<br>
+				Greenvulcano
+				<br>
+				Via Valadier, 53, Roma
+			</h1>
+		</div>
+		<div id="main_running_wrap">
+			<div class="top">
+				<!-- div for map-->
+				<div id="map_wrap" class="col-lg-6"></div>
+				
+				<!-- div for video & data-->
+				<div class="col-lg-6">
+					<!-- Normal data-->
+					<div class="col-lg-12">
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								<h3 class="panel-title">Data for: <span id="data_time">11/01/2017 11:38:02</span></h3>
+							</div>
+							<div class="panel-body">
+								<div id="temp_wrap" class="col-lg-3 data_wrap">
+									<i class="fa fa-thermometer-quarter"></i>
+									<strong>12</strong>
+									<small>Temperature (C*)</small>
+								</div>
+								<div id="CO2_wrap" class="col-lg-3 data_wrap">
+									<i class="fa fa-industry"></i>
+									<strong>140</strong>
+									<small>PM<sub>10</sub> (µg/m³)</small>
+								</div>
+								<div id="light_wrap" class="col-lg-3 data_wrap">
+									<i class="fa fa-lightbulb-o"></i>
+									<strong>80</strong>
+									<small>Lux (Lx)</small>
+								</div>
+								<div id="noise_wrap" class="col-lg-3 data_wrap">
+									<i class="fa fa-bullhorn"></i>
+									<strong>80</strong>
+									<small>Noise (dB)</small>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Danger data-->
+					<div id="noDanger_data_wrap" class="col-lg-12">
+						<div class="panel">
+							<div class="panel-heading">
+								<h3 class="panel-title">No Danger detected!</h3>
+							</div>
+							<div class="panel-body">
+								<img src="../assets/logo_gv.svg">
+							</div>
+						</div>
+					</div>
+					<div id="danger_data_wrap" class="col-lg-12" hidden>
+						<div class="panel">
+							<div class="panel-heading">
+								<h3 class="panel-title">Danger detected!</h3>
+							</div>
+							<div class="panel-body"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="bottom">
+				<!-- Buttons for development Start-->
+				<div id="button_wrap"class="col-lg-12">
+					<button id="holeBt" type="button" class="btn btn-primary">Hole</button>
+					<button id="treeBt" type="button" class="btn btn-primary">Tree</button>
+					<button id="tunnelBt" type="button" class="btn btn-primary">Tunnel</button>
+					<button id="signBt" type="button" class="btn btn-primary">Sign</button>
+					<button id="getPtBt" type="button" class="btn btn-warning">Get Point</button>
+					<button id="StopTrip" type="button" class="btn btn-danger">Stop Trip</button>
+					<button id="StartTrip" type="button" class="btn btn-danger">Start Trip</button>
+				</div>
+				<!-- Buttons for development End-->
+				
+				<!-- Table for history-->
+				<div id="historical_data_table_wrap" class="tables_data col-lg-6 container">
+			  		<h2><i class="fa fa-history"></i> Historical data table</h2>                                                                                  
+			  		<div class="table">          
+				  		<table id="historical_data_table" class="table">
+				    		<thead>
+								<tr>
+							        <th>Time</th>
+							        <th>Temperature (C*)</th>
+							        <th>PM<sub>10</sub>  (µg/m³)</th>
+							        <th>Lux (Lx)</th>
+							        <th>Noise (dB)</th>
+							    </tr>
+							</thead>
+				    		<tbody>
+						    </tbody>
+						  </table>
+					  </div>
+				</div>
+				
+				<!-- Table for danger-->
+				<div id="danger_data_table_wrap" class="tables_data col-lg-6 container">
+			  		<h2><i class="fa fa-exclamation-triangle"></i> Danger data table</h2>                                                                                  
+			  		<div class="table">          
+				  		<table id="danger_data_table" class="table">
+				    		<thead>
+								<tr>
+									<th> </th>
+							        <th>Time</th>
+							        <th>GPS</th>
+							        <th>Type:</th>
+							    </tr>
+							</thead>
+				    		<tbody>
+						    </tbody>
+						  </table>
+					  </div>
+				</div>
+			</div>
+		</div>
+		<script src="../js/jquery-1.11.3.min.js"></script>
+		<script src="../js/bootstrap.min.js"></script>
+		<script src="../js/snap.svg-min.js"></script>
+		<script src="../js/main.js"></script>
+	</body>
+</html>

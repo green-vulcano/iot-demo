@@ -23,6 +23,5 @@ class Proximity:
 
     def _proximityCallback(self, channel):
         if(GPIO.input(channel) == GPIO.HIGH):
-            self.status = not self.status
-            print("proximity '{0}'".format(self.name)
-            publish.single("gv/sensor/proximity/"+str(self.id), "{{\"name\":\"{0}\",\"status\":\"{1}\"}}".format(self.name, True), hostname="localhost", protocol=mqtt.MQTTv31)
+            print("proximity '{0}'".format(self.name))
+            publish.single("gv/sensor/proximity", "{{\"id\":\"{0}\", \"name\":\"{1}\",\"status\":\"{2}\"}}".format(self.id, self.name, True), hostname="localhost", protocol=mqtt.MQTTv31)            

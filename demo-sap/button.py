@@ -39,4 +39,4 @@ class Button:
         if(GPIO.input(channel) == GPIO.HIGH):
             self.status = not self.status
             print("button '{0}' changes status to {1}".format(self.name, self.status))
-            publish.single("gv/sensor/button/", "{{\"id\":\"{0}\",\"name\":\"{1}\",\"status\":\"{2}\"}}".format(self.id, self.name, self.status), hostname="localhost", protocol=mqtt.MQTTv31)
+            publish.single("gv/sensor/button", "{{\"id\":\"{0}\",\"name\":\"{1}\",\"status\":\"{2}\"}}".format(self.id, self.name, self.status), hostname="localhost", protocol=mqtt.MQTTv31)

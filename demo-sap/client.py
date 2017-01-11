@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import RPi.GPIO as GPIO
+import paho.mqtt.publish as publish
 import paho.mqtt.client as mqtt
 import json
 
@@ -8,6 +9,7 @@ import time
 
 from servo import Servo
 from button import Button
+from proximity import Proximity
 from led import Led
 from rele import Rele
 
@@ -18,26 +20,24 @@ from rele import Rele
 #   gv/sensor/led {"id":"led1","status":"on", "name":"galleria"}
 #   gv/sensor/rele {"id":"rele","status":"on", "name":"galleria"}
 
+servo1 = Servo("srv1", "servo_tombino", 26)
+servo2 = Servo("srv2", "servo_albero", 22)
+servo3 = Servo("srv3", "servo_segnale", 24)
 
-servo1 = Servo("srv1", "servo_albero", 22)
-servo2 = Servo("srv2", "servo_segnale", 24)
-servo3 = Servo("srv3", "servo_tombino", 26)
+button1 = Button("btn1", "button_rele", 11)
+button2 = Button("btn2", "button_albero", 13)
+button3 = Button("btn3", "button_segnale", 15)
+button4 = Button("btn4", "button_tombino", 19)
+button5 = Button("btn5", "button_galleria", 21)
 
-button1 = Button("btn1", "button_albero", 11)
-button1 = Button("btn2", "button_segnale", 13)
-button1 = Button("btn3", "button_tombino", 15)
-button1 = Button("btn4", "button_galleria", 19)
-button1 = Button("btn5", "button_rele", 21)
+proximity1 = Proximity("prx1", "proximity_albero", 29)
+proximity2 = Proximity("prx2", "proximity_segnale", 31)
+proximity3 = Proximity("prx3", "proximity_fumo", 33)
+proximity4 = Proximity("prx4", "proximity_tombino", 35)
+proximity5 = Proximity("prx5", "proximity_galleria", 37)
 
-proximity1 = Button("prx1", "proximity_albero", 29)
-proximity2 = Button("prx2", "proximity_segnale", 31)
-proximity3 = Button("prx3", "proximity_fumo", 33)
-proximity4 = Button("prx4", "proximity_tombino", 35)
-proximity5 = Button("prx5", "proximity_galleria", 37)
-
-led1 = Led("led1", "led_galleria", 8)
-# led2 = Led("led2", "led_auto1", 10)
-# led3 = Led("led3", "led_auto2", 12)
+led1 = Led("led1", "led_galleria", 12)
+led2 = Led("led2", "led_auto1", 10)
 
 rele1 = Rele("rele1", "rele_power", 23)
 
@@ -85,6 +85,8 @@ auto_t.start()
 #################################################################################
 def on_connect(client, userdata, rc):
 	client.subscribe("gv/sensor/#")
+	client.subscribe("gv/req/status")
+	client.publish("gv/connection", "{\"status\":\"true\"}", 0, False)
 
 #################################################################################
 #
@@ -114,9 +116,21 @@ def on_message(client, userdata, msg):
 			performLed(jsonMsg)
 		elif msg.topic == "gv/sensor/rele":
 			performRele(jsonMsg)
+		elif msg.topic == "gv/req/status":
+			performStatus()
 
 	except Exception as e:
 		print("Exception: " + str(e))
+
+#################################################################################
+#
+# 
+#################################################################################
+def performStatus():
+	topic = "gv/status"
+	payload = "{{\"btn1\":\"{0}\",\"btn2\":\"{1}\",\"btn3\":\"{2}\",\"btn4\":\"{3}\",\"btn5\":\"{4}\"}}".format(str(button1.status),str(button2.status),str(button3.status),str(button4.status),str(button5.status))
+	publish.single(topic, payload, hostname="localhost", protocol=mqtt.MQTTv31)
+
 
 #################################################################################
 #
@@ -146,31 +160,31 @@ def performButton(payload):
 	status = str(payload["status"])
 
 	# albero
-	if id == "btn1":
+	if id == "btn2":
 		if status in ['true', 'True']:
-			servo1.move("160")
+			servo2.move("160")
 		else:
-			servo1.move("120")
+			servo2.move("120")
 	# segnale
-	elif id == "btn2":
-		if status in ['true', 'True']:
-			servo2.move("5")
-		else:
-			servo2.move("0")
-	# tombino
 	elif id == "btn3":
 		if status in ['true', 'True']:
-			servo3.move("120")
+			servo3.move("50")
 		else:
-			servo3.move("160")
-	#galleria
+			servo3.move("0")
+	# tombino
 	elif id == "btn4":
+		if status in ['true', 'True']:
+			servo1.move("120")
+		else:
+			servo1.move("160")
+	#galleria
+	elif id == "btn5":
 		if status in ['true', 'True']:
 			led1.on()
 		else:
 			led1.off()	
-	# led auto
-	elif id == "btn5":
+	# led auto-rele
+	elif id == "btn1":
 		if status in ['true', 'True']:
 			auto_t.status = True
 			rele1.on()
@@ -192,11 +206,11 @@ def performLed(payload):
 			led1.on()
 		else:
 			led1.off()
-	# elif id == "led2":
-	# 	if status in ['true', 'True', 'on', 'On']:
-	# 		led2.on()
-	# 	else:
-	# 		led2.off()
+	elif id == "led2":
+		if status in ['true', 'True', 'on', 'On']:
+			led2.on()
+		else:
+			led2.off()
 	# elif id == "led3":
 	# 	if status in ['true', 'True', 'on', 'On']:
 	# 		led3.on()
@@ -228,7 +242,20 @@ def main():
 		client.on_connect = on_connect
 		client.on_message = on_message
 		client.on_disconnect = on_disconnect
+
+		client.will_set('gv/connetion', "{\"status\":\"false\"}", 0, False)
 		client.connect("localhost", 1883, 60)
+
+		servo1.move("120")
+		servo2.move("160")
+		servo3.move("50")
+		led1.on()
+		
+		button1.status = False # rele
+		button2.status = True # albero
+		button3.status = True # segnale
+		button4.status = True # tombino
+		button5.status = True # galleria
 		
 		client.loop_forever()
 	except KeyboardInterrupt:
